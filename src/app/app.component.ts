@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Countries, UserRegister } from './model/user-register.model';
 
@@ -7,7 +7,7 @@ import { Countries, UserRegister } from './model/user-register.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'UHAngularEjercicio2';
 
   public createUserForm?: FormGroup;
@@ -25,7 +25,7 @@ export class AppComponent {
       nif: new FormControl("", [Validators.required, Validators.pattern('((([X-Z])|([LM])){1}([-]?)((\d){7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z]))')]),
       nTlf: new FormControl("", [Validators.min(600000000), Validators.max(999999999)]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required, Validators.pattern('^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{6,}$')]),
+      password: new FormControl("", {validators: [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$')], updateOn:'blur'}),
       hasAcceptedConditions: new FormControl("", Validators.required),
       countries: new FormControl("Spain"),
       description: new FormControl("")
